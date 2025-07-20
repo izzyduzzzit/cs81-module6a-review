@@ -37,6 +37,16 @@ Playlist.prototype.listSongs = function() {
   console.log("Songs:", this.songs.join(", "));
 };
 
+// New method added to shuffle the songs in the playlist randomly using the Fisher-Yates shuffle algorithm and log the shuffled playlist to the console
+Playlist.prototype.shuffle = function() {
+  for (let i = this.songs.length - 1; i > 0; i--) { // Loop through the songs array backwards to swap each song with a random song that comes before it (or itself)
+    const j = Math.floor(Math.random() * (i + 1)); // Generate a random index between 0 and i (inclusive) to swap with the current song at index i
+    [this.songs[i], this.songs[j]] = [this.songs[j], this.songs[i]]; // Swap the songs at index i and j using destructuring assignment
+  }
+  console.log("Playlist shuffled!"); // Log a message indicating that the playlist has been shuffled
+  this.listSongs(); // Call the listSongs method to display the shuffled playlist to the console
+};
+
 // Example usage that uses the constructed Playlist object to create a playlist object called myMix and manipulate it.
 let myMix = new Playlist("My Chill Mix"); // Create a new playlist called "My Chill Mix"
 myMix.addSong("Lofi Study"); // Add songs to the playlist using the addSong method
